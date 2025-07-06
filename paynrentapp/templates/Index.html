@@ -1,0 +1,364 @@
+<style>
+.maincontainer{
+    background: #dfe6e9;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    
+    
+}
+.appbar{
+    background: #fff;
+    width: 100vw;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+       font-family:Abril Fatface;
+       font-weight: bolder;
+       letter-spacing: 1px;
+       
+}
+.sidebox{
+    width: 500px;
+    height: 450px;
+    background: #fff;
+    border-radius: 10px;
+    margin: 20px;
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.image_center{
+     width: 600px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box{
+    width: 400px;
+    height: 50px;
+    border: 1px solid #778ca3;
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: none;
+}
+.boxleft{
+    width: 200px;
+    height: 50px;
+    border: 1px solid #778ca3;
+    border-radius: 0px 0px 0px 10px;
+    border-right: none;
+}
+.boxright{
+    width: 200px;
+    height: 50px;
+    border: 1px solid #778ca3;
+    border-radius: 0px 0px 10px 0px;
+    
+}
+.button_style{
+    width: 400px;
+    height: 50px;
+    border: 1px solid #778ca3;
+    border-radius: 10px;
+   margin-top: 30px ;
+   background: #49a6ba;
+   display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+.centerAlign{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.textStyle{
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 24;
+    text-align: center;
+    margin: 2px;
+    width: 150px;
+}
+.datetextStyle{
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 20;
+    text-align: center;
+    margin: 6px;
+    width: 180px;
+}
+.footer{
+    width: 80vw;
+    height: 40vh;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+}
+.maincontainer2{
+    background: #dfe6e9;
+    width: 100vw;
+    height: 100vh;
+    
+    display: flex;
+    align-items: center;
+    
+    
+}
+.footer2{
+    width: 80vw;
+    height: 30vh;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+}
+</style>
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Josefin+Sans&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Josefin+Sans&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+      <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" />
+    <!-- datetimepicker jQuery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js">
+   </script>
+  
+        <script>
+            $(document).ready(function(){
+                $(".city").click(function(){
+                 $('#dcity').val($(this).attr('scity'))
+                 $('#cheading').html(`Car rental in ${ $(this).attr('scity')}`)
+                })
+                $(".datetimepicker").each(function () {
+                  $(this).datetimepicker();
+                   });
+                $("#enddate").change(function(){
+                    const date1 = new Date($("#startdate").val());
+                    const date2 = new Date($("#enddate").val());
+                    const diffTime = Math.abs(date2 - date1);
+                    S=parseInt(diffTime/1000)
+                    M=parseInt(S/60)
+                    H=parseInt(M/60)
+                    D=parseInt(H/24)
+                    H=H%24
+
+                    const diffDays =parseInt(diffTime / (1000 * 60 * 60 * 24)); 
+                    console.log(diffDays+" Days  "+H+" Hours")
+                    $("#cartime").html(diffDays+" Days  "+H+" Hours");
+                    $('#dh').val(diffDays+":"+H);
+                   
+                })
+                $('#btn').click(function(){
+                  $.getJSON('http://localhost:8000/api/showvehiclelist',{city:$('#dcity').val(),starttime:$('#startdate').val(),endtime:$('#enddate').val(),dh:$('#dh').val()},function(data){
+
+                  
+
+                 window.location.href="http://localhost:8000/api/uservehiclelist"
+                   
+                 })
+                })
+            })
+        </script>
+    </head>
+<body>
+    <div class="maincontainer">
+        <div class="appbar">
+            <img src="/static/revvlogo.png" style="height: 50; width: 140; margin-left: 5%;">
+            <div style="margin-left: auto; width: 15%; display: flex; align-items: center;">
+            <i style="font-size:32 ; margin-right: 5%;" class="fa fa-sign-in" aria-hidden="true"></i>
+            <span style=" margin-left: 5%;">
+                Login & Signup
+            </span>
+        </div>
+        </div>
+        <div class="row" style="margin-top: 40px;">
+            <div class="col-md-6 " >
+                <div class="sidebox">
+                   
+                     <img src="/static/leftbox.png" width="80%">
+                     <img src="/static/rentals.png" width="30%">
+                     <div id="cheading" style="font-size: 20px; font-weight: 500; color: #7f8c8d;">
+                        Self drive car rentals in India
+                     </div>
+                    <div>
+                       <div class="box centerAlign" data-toggle="modal" data-target="#myModal">
+                        <img src="/static/location.jpeg" width="25">
+                        <input class="textStyle" type="text" id="dcity" placeholder="Select City...">
+
+                        </div>
+                       <div style="display: flex; flex-direction: row;">
+                       <div class="boxleft">
+                        <input type="text" id="startdate" class="datetimepicker datetextStyle" placeholder="Start Date" />
+                       </div>
+                       <div class="boxright">
+                        <input type="text" id="enddate" class="datetimepicker datetextStyle" placeholder="End Date" />
+                       </div>
+                       </div>
+                    </div>
+                    <input type="hidden" id="dh" value="" />
+                    <div id="cartime" style="font-size: 20px; font-weight: 500; color: #7f8c8d;">
+
+
+                    </div>
+                    <div id="btn" class="button_style">
+                        <div  style="display: flex; align-items: center; font-size: 20; color: #fff;  font-weight: bold;">
+                            <span>Submit</span>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="col-md-6">
+                <div class="image_center">
+            <img src="/static/home_bg.webp" width="80%">
+        </div>    
+        </div>
+        </div>
+    </div>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Select City</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <h4 class="city"  scity="Gwalior">Gwalior</h4>
+          <h4 class="city"  scity="New Delhi">New Delhi</h4>
+          <h4 class="city"  scity="Hyderabad">Hyderabad</h4>
+          <h4 class="city"  scity="Pune">Pune</h4>
+          <h4 class="city"  scity="Bangalore">Bangalore</h4>
+          <h4 class="city"  scity="Noida">Noida</h4>
+        </div>
+        
+       
+        
+      </div>
+      
+ 
+
+    </div>
+  
+
+  </div>
+  
+  <div class="maincontainer2 centerAlign">
+    <div class="footer2">
+        <div class="row g-3">
+            <div class="col-md-3">
+             <img src="/static/2.png" style="padding-top: 40px; padding-left: 50px; " width="120"><br>
+             <div style="padding-left: 50px; font-size: 34; font-weight: 700;">1 Mn+</div>
+             <div style="padding-left: 50px;">Happy Revvers</div>
+            
+            </div>
+            <div class="col-md-3">
+                <img src="/static/3.png" style="padding-top: 40px; padding-left: 50px; " width="120"><br>
+                <div style="padding-left: 50px; font-size: 34; font-weight: 700;">22+ cities</div>
+                <div style="padding-left: 50px;">Across India</div>
+               </div>
+               <div class="col-md-3">
+                <img src="/static/4.png" style="padding-top: 40px; padding-left: 50px; " width="120"><br>
+                <div style="padding-left: 50px; font-size: 34; font-weight: 700;">50 Mn +</div>
+                <div style="padding-left: 50px;">Kms travelled</div>
+               </div>
+               <div class="col-md-3">
+                <img src="/static/5.png" style="padding-top: 40px; padding-left: 50px; " width="120"><br>
+                <div style="padding-left: 50px; font-size: 34; font-weight: 700;">4.8 / 5</div>
+                <div style="padding-left: 50px;">20K+ reviewers</div>
+               </div>
+
+        </div>
+
+    </div>
+
+ </div>
+ 
+ 
+  <div class="maincontainer2 centerAlign">
+    <div class="footer2">
+        <div class="row g-3">
+            <div class="col-md-3">
+             <img src="/static/hyundai.png" style="padding-top: 40px; padding-left: 50px; " width="180"><br>
+             <div style="padding-left: 40px;">Hyundai Motor Company</div>
+            </div>
+            <div class="col-md-3">
+                <img src="/static/edelweiss.png" style="padding-top: 40px; padding-left: 50px; " width="180"><br>
+                <div style="padding-left: 40px;">Edelweiss Financial Services</div>
+               </div>
+               <div class="col-md-3">
+                <img src="/static/dream.png" style="padding-top: 40px; padding-left: 50px; " width="150"><br>
+                <div style="padding-left: 40px;">Dream Incubator</div>
+               </div>
+               <div class="col-md-3">
+                <img src="/static/beenext.png" style="padding-top: 40px; padding-left: 50px; " width="180"><br>
+                <div style="padding-left: 80px;">Beenext</div>
+               </div>
+
+        </div>
+
+    </div>
+
+ </div>
+ 
+ 
+ 
+  <div class="maincontainer2 centerAlign">
+  <div class="footer">
+    <div class="row g-3">
+        <div class="col-md-5">
+    <img src="/static/pn_logo.svg" width="130" style="padding-left: 30px; padding-top: 30px;">
+    <div style="padding-left: 30px; font-size: 15">© 2023 Primemover Mobility Technologies Pvt Ltd. All rights reserved</div>
+       </div>
+       <div class="col-md-3" style="padding-top: 30px;">
+        <a href="/" style="text-decoration: none; color: black;">Home</a><br><br>
+        <a href="/" style="text-decoration: none; color: black;">FAQs</a><br><br>
+        <a href="/" style="text-decoration: none; color: black;">Policy</a><br><br>
+        <a href="/" style="text-decoration: none; color: black;">Blog</a><br><br>
+       </div>
+       <div class="col-md-4">
+        <div style="padding-top: 30px; font-weight: 600;">Social</div><br>
+        <a href="/" style="text-decoration: none; padding:5px;" ><img src="/static/facebook.png" width="60"></a>
+        <a href="/" style="text-decoration: none; padding:10px;"><img src="/static/twitter.png" width="40"></a>
+        <a href="/" style="text-decoration: none; padding:10px;"><img src="/static/instagram.png" width="40"></a>
+        <a href="/" style="text-decoration: none; padding:10px;"><img src="/static/youtube.png" width="50"></a>
+        <a href="/" style="text-decoration: none; padding:10px;"><img src="/static/linkedin.png" width="50"></a><br>
+        <img src="/static/1.png" width="220" style="padding-left: 20px; padding-top: 20px;">
+       </div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

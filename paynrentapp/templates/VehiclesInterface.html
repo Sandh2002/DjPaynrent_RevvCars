@@ -1,0 +1,158 @@
+<style>
+    .maincontainer{
+       width: 100vw;
+       height: 100vh;
+       background: #29a4f0e3;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+   
+   }
+   .box{
+       background: #fff;
+       width: 60vw;
+       padding: 10px;
+       height: auto;
+       border-radius: 8px;
+   }
+   .headingtext{
+       font-size: 16px;
+       font-family:Abril Fatface;
+       font-weight: bold;
+       padding: 5px;
+       letter-spacing: 1px;
+       
+   }
+   .labeltext{
+       font-size: 14px;
+       font-family:Abril Fatface;
+       font-weight: bolder;
+       letter-spacing: 1px;
+       
+   }
+   </style>
+   <html>
+       <head>
+           <link rel="preconnect" href="https://fonts.googleapis.com">
+           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+           <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Josefin+Sans&display=swap" rel="stylesheet">
+           <link rel="preconnect" href="https://fonts.googleapis.com">
+           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+           <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Josefin+Sans&display=swap" rel="stylesheet">
+           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+           <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+           <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+          
+           <script src="/static/category.js"></script>
+       </head>
+       <div class="maincontainer">
+           <div class="box">
+            <form class="row g-3" action="/api/vehiclessubmit" enctype="multipart/form-data" method="post"> {% csrf_token %}
+              <div class="col-md-6 headingtext" >
+               <img src="/static/car.gif" style="width: 55px; padding-right: 8px;"/>
+               Add New Vehicle
+   
+              </div>
+              <div class="col-md-6" style="display: flex; justify-content: right;">
+                <a href="/api/displayvehicles" style="text-decoration: none;"> <img src="/static/list.gif" width="50"></a>
+               </div>
+              <div class="col-md-4">
+                <label for="categoryid" class="form-label labeltext">Category Id</label>
+                <select required name="categoryid" class="form-select" id="categoryid">
+                </select>
+             </div>
+             <div class="col-md-4">
+                <label for="subcategoryid" class="form-label labeltext">Sub-Category Id</label>
+                <select required name="subcategoryid" class="form-select" id="subcategoryid">
+                
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="modelyear" class="form-label labeltext">Model Year</label>
+                <input required name="modelyear" type="text" class="form-control" id="modelyear">
+              </div>
+             <div class="col-md-4">
+               <label for="variant" class="form-label labeltext">Variant</label>
+               <input required name="variant" type="text" class="form-control" id="variant">
+             </div>
+             <div class="col-md-4">
+                <label for="price" class="form-label labeltext">Price</label>
+                <input required name="price" type="text" class="form-control" id="price">
+              </div>
+              <div class="col-md-4">
+                <label for="insured" class="form-label labeltext">Insurance</label>
+                <div>
+                <input class="form-check-input" type="radio" name="insured" value="Yes" id="insured">
+                <label class="form-check-label" for="yes">
+                 Yes
+                 </label>
+                 <input class="form-check-input" type="radio" name="insured" value="No" id="insured">
+                <label class="form-check-label" for="no">
+                 No
+               </label>
+              </div>
+              </div>
+              <div class="col-md-4">
+                <label for="registrationno" class="form-label labeltext">Registration No.</label>
+                <input required name="registrationno" type="text" class="form-control" id="registrationno">
+              </div>
+              <div class="col-md-4">
+                <label for="ownername" class="form-label labeltext">Owner Name</label>
+                <input required name="ownername" type="text" class="form-control" id="ownername">
+              </div>
+              <div class="col-md-4">
+                <label for="mobileno" class="form-label labeltext">Mobile No.</label>
+                <input required name="mobileno" type="text" class="form-control" id="mobileno">
+              </div>
+              <div class="col-md-4">
+                <label for="color" class="form-label labeltext">Color</label>
+                <input required name="color" type="text" class="form-control" id="color">
+              </div>
+              <div class="col-md-4">
+                <label for="fueltype" class="form-label labeltext">Fuel Type</label>
+                <select required name="fueltype" class="form-select" id="fueltype">
+                  <option>-Select Fuel-</option>
+                  <option>Petrol</option>
+                  <option>Diesel</option>
+                  <option>CNG</option>
+                  <option>EV</option>
+                  </select>
+              </div>
+              <div class="col-md-4">
+                <label for="noofseats" class="form-label labeltext">No.of Seats</label>
+                <input required name="noofseats" type="number" min="2" max="18" class="form-control" id="noofseats">
+              </div>
+              <div class="col-md-12">
+                <label for="transmissiontype" class="form-label labeltext">Transmission Type</label>
+                <div>
+                <input class="form-check-input" type="radio" name="transmissiontype" value="Manual" id="transmissiontype">
+                <label class="form-check-label" for="manual">
+                 Manual
+                 </label>
+                 <input class="form-check-input" type="radio" name="transmissiontype" value="Automatic" id="transmissiontype">
+                <label class="form-check-label" for="automatic">
+                Automatic
+               </label>
+              </div>
+              </div>
+             <div class="col-md-12">
+               <label for="formFile" class="form-label labeltext">Picture</label>
+               <input required name="picture" class="form-control" type="file" id="picture">
+             
+           </div> 
+           <div class="col-md-6" style="display: flex; justify-content: center;align-items: center;">
+             <button style="width: 75%;" type="submit" class="btn btn-dark labeltext">Submit</button>
+            </div>
+            <div class="col-md-6" style="display: flex; justify-content: center;align-items: center;">
+             <button style="width: 75%;" type="reset" class="btn btn-dark labeltext">Reset</button>
+            </div> 
+            <div class="col-md-12" style="display: flex; justify-content: center;align-items: center;">
+               <span style="font-weight: bold;">{{message}}</span>
+               </div>   
+            </form>
+           </div>
+   
+       </div>
+   </html>

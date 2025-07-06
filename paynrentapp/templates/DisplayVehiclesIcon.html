@@ -1,0 +1,14 @@
+<html>
+    <center>
+        <form action="/api/save_vehicles_icon" method="post" enctype="multipart/form-data">  {% csrf_token %}
+            <h2><b>Category Id:{{data.ci.0}}</b></h2>        
+    <h2><b>Sub-Category Id:{{data.sci.0}}</b></h2>
+    <h2><b>Variant:{{data.var.0}}</b></h2>
+    <input type="hidden" name="id" value="{{data.id.0}}"/>
+    <img src="/{{data.picture.0}}" width="300" height="300"/><br><br>
+   <b> Plzzzz Select New Icon:</b><br><br>
+   <input type="file" name="picture" required>
+   <input type="submit" >
+</form>
+</center>
+</html>
